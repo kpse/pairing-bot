@@ -1,4 +1,34 @@
-require "sinatra"
+require 'sinatra'
+require 'enumerator'
+require 'json'
+
 get "/" do
-  "Hello world!"
+  content_type :json
+
+  all_members = %w(louis jichao ting praveen mel)
+
+  absence = params['text'] || ''
+
+  condition = 'All good'
+  condition = "Given #{absence} is absent" if absence != ''
+  condition = "Given #{absence} are absent" if absence.include? ','
+
+  paring = []
+  all_members.select {|name| not absence.split(',').include? name }.shuffle.each_slice(2) do |pair|
+    paring.push(pair)
+  end
+
+  def display pair
+    p1, p2 = pair
+    return "#{p1.capitalize} pair with #{p2.capitalize}.\n" unless p2.nil?
+    "#{p1.capitalize} works alone.\n"
+  end
+
+  res = {
+    :text => "#{condition}, #{Time.now.strftime('%b %d, %Y')}'s pairing plan:\n\n#{paring.map {|x| display x}.join("\n") }"
+  }
+
+
+  res.to_json
+
 end
