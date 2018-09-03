@@ -4,10 +4,21 @@ require 'json'
 
 get "/" do
   content_type :json
-
-  all_members = %w(louis jichao ting praveen mel)
-
   absence = params['text'] || ''
+  res = pair_while_absence absence
+  res.to_json
+end
+
+post "/" do
+  content_type :json
+  absence = params['text'] || ''
+  res = pair_while_absence absence
+  res.to_json
+end
+
+
+def pair_while_absence absence=''
+  all_members = %w(louis jichao ting praveen mel)
 
   condition = 'All good'
   condition = "Given #{absence} is absent" if absence != ''
@@ -24,11 +35,7 @@ get "/" do
     "#{p1.capitalize} works alone.\n"
   end
 
-  res = {
+  {
     :text => "#{condition}, #{Time.now.strftime('%b %d, %Y')}'s pairing plan:\n\n#{paring.map {|x| display x}.join("\n") }"
   }
-
-
-  res.to_json
-
 end
