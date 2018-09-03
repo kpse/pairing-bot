@@ -36,6 +36,7 @@ def pair_while_absence absence=''
   end
 
   {
+    :response_type => 'in_channel',
     :text => "#{condition}, #{Time.now.strftime('%b %d, %Y')}'s pairing plan:\n\n#{paring.map {|x| display x}.join("\n") }"
   }
 end
