@@ -4,7 +4,7 @@ require 'json'
 
 get "/" do
   content_type :json
-  all_members = params['members'] || 'louis,jichao,ting,praveen,mel'
+  all_members = params['members'] || 'nobody'
   absence = params['text'] || ''
   res = pair_while_absence all_members.split(','), absence
   res.to_json
@@ -12,7 +12,7 @@ end
 
 post "/" do
   content_type :json
-  all_members = params['members'] || 'louis,jichao,ting,praveen,mel'
+  all_members = params['members'] || 'nobody'
   absence = params['text'] || ''
   res = pair_while_absence all_members.split(','), absence
   res.to_json
