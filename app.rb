@@ -22,7 +22,7 @@ def pair_while_absence absence=''
 
   condition = 'All good'
   condition = "Given *#{absence.capitalize}* is absent" if absence != ''
-  condition = "Given #{absence.split(',').map {|x| "*#{x.capitalize}*"}.join(", ") }} are absent" if absence.include? ','
+  condition = "Given #{absence.split(',').map {|x| "*#{x.capitalize}*"}.join(", ") } are absent" if absence.include? ','
 
   paring = []
   all_members.select {|name| not absence.split(',').include? name }.shuffle.each_slice(2) do |pair|
