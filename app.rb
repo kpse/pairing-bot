@@ -21,8 +21,8 @@ def pair_while_absence absence=''
   all_members = %w(louis jichao ting praveen mel)
 
   condition = 'All good'
-  condition = "Given #{absence} is absent" if absence != ''
-  condition = "Given #{absence} are absent" if absence.include? ','
+  condition = "Given *#{absence}* is absent" if absence != ''
+  condition = "Given #{absence.map {|x| "*#{x}*"}.join(", ") }} are absent" if absence.include? ','
 
   paring = []
   all_members.select {|name| not absence.split(',').include? name }.shuffle.each_slice(2) do |pair|
@@ -31,7 +31,7 @@ def pair_while_absence absence=''
 
   def display pair
     p1, p2 = pair
-    return "*#{p1.capitalize}* pair with *#{p2.capitalize}*.\n" unless p2.nil?
+    return "*#{p1.capitalize}* will pair with *#{p2.capitalize}*.\n" unless p2.nil?
     "*#{p1.capitalize}* works alone.\n"
   end
 
