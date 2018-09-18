@@ -22,7 +22,7 @@ end
 def display(pair)
   p1, p2 = pair
   return "*#{p1.capitalize}* will pair with *#{p2.capitalize}*.\n" unless p2.nil?
-  "*#{p1.capitalize}* works alone.\n"
+  "*#{p1.capitalize}* can join either of above pairs.\n"
 end
 
 def pair_while_absence (all_members, absence='')
@@ -38,7 +38,7 @@ def pair_while_absence (all_members, absence='')
 
   {
     :response_type => 'in_channel',
-    :text => "#{condition}, *#{Time.now.strftime('%b %d, %Y')}*'s pairing plan:\n\n#{paring.map {|x| display x}.join("\n") }",
+    :text => "#{condition}, *#{Time.now.strftime('%b %d, %Y')}*'s pairing/mobbing plan:\n\n#{paring.map {|x| display x}.join("\n") }",
     :mrkdwn => true
   }
 end
